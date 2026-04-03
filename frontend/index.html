@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Analyzer - AI-Powered Job Matching</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-file-alt"></i>
+                <span>Resume Analyzer</span>
+            </div>
+            <div class="nav-links">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#how-it-works" class="nav-link">How It Works</a>
+                <a href="#features" class="nav-link">Features</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">AI-Powered Resume Analysis</h1>
+                <p class="hero-subtitle">Get instant feedback on how well your resume matches job requirements</p>
+                <button class="cta-button" onclick="scrollToAnalyzer()">
+                    <i class="fas fa-rocket"></i> Start Analysis
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works-section">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-icon">
+                        <i class="fas fa-upload"></i>
+                    </div>
+                    <h3>1. Upload Resume</h3>
+                    <p>Upload your resume in PDF format</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon">
+                        <i class="fas fa-clipboard-list"></i>
+                    </div>
+                    <h3>2. Add Job Description</h3>
+                    <p>Paste the job description you're targeting</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>3. AI Analysis</h3>
+                    <p>Our AI analyzes the match using RAG technology</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>4. Get Insights</h3>
+                    <p>Receive detailed feedback and recommendations</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <h2 class="section-title">Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-percentage feature-icon"></i>
+                    <h3>Match Score</h3>
+                    <p>Get a percentage score showing how well you match the job</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-tools feature-icon"></i>
+                    <h3>Skills Gap Analysis</h3>
+                    <p>Identify missing skills required for the position</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-lightbulb feature-icon"></i>
+                    <h3>Smart Suggestions</h3>
+                    <p>Get actionable improvements for your resume</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-graduation-cap feature-icon"></i>
+                    <h3>Learning Path</h3>
+                    <p>Recommended skills to enhance your profile</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Analyzer Section -->
+    <section id="analyzer" class="analyzer-section">
+        <div class="container">
+            <h2 class="section-title">Analyze Your Resume</h2>
+            
+            <!-- Upload Form -->
+            <div class="analyzer-card" id="uploadCard">
+                <form id="analyzerForm" class="analyzer-form">
+                    <div class="form-row">
+                        <!-- Resume Upload -->
+                        <div class="form-group">
+                            <label for="resumeFile" class="form-label">
+                                <i class="fas fa-file-pdf"></i> Upload Resume (PDF)
+                            </label>
+                            <div class="file-upload-wrapper">
+                                <input type="file" id="resumeFile" name="resume" accept=".pdf" required hidden>
+                                <div class="file-upload-area" id="resumeUploadArea">
+                                    <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                                    <p class="upload-text">Click to upload or drag and drop</p>
+                                    <p class="upload-hint">PDF files only (Max 10MB)</p>
+                                </div>
+                                <div class="file-preview" id="resumePreview" style="display: none;">
+                                    <i class="fas fa-file-pdf file-icon"></i>
+                                    <div class="file-info">
+                                        <p class="file-name" id="resumeFileName"></p>
+                                        <p class="file-size" id="resumeFileSize"></p>
+                                    </div>
+                                    <button type="button" class="remove-file" id="removeResume">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Job Description -->
+                        <div class="form-group">
+                            <label for="jobDescription" class="form-label">
+                                <i class="fas fa-briefcase"></i> Job Description
+                            </label>
+                            <textarea 
+                                id="jobDescription" 
+                                name="job_description_text" 
+                                rows="12" 
+                                placeholder="Paste the complete job description here...&#10;&#10;Example:&#10;We are looking for a Senior Python Developer with:&#10;- 5+ years of experience&#10;- Expertise in FastAPI, Django&#10;- Machine Learning experience&#10;- Strong problem-solving skills..."
+                                required
+                            ></textarea>
+                            <div class="char-counter">
+                                <span id="charCount">0</span> characters
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" id="analyzeBtn">
+                            <i class="fas fa-search"></i> Analyze Resume
+                        </button>
+                        <button type="button" class="btn btn-secondary" id="resetBtn">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Loading State -->
+            <div class="loading-container" id="loadingContainer" style="display: none;">
+                <div class="loading-content">
+                    <div class="spinner"></div>
+                    <h3>Analyzing Your Resume...</h3>
+                    <p class="loading-message" id="loadingMessage">Initializing analysis...</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Error Display -->
+            <div class="alert alert-error" id="errorAlert" style="display: none;">
+                <i class="fas fa-exclamation-circle"></i>
+                <div class="alert-content">
+                    <h4>Analysis Failed</h4>
+                    <p id="errorMessage"></p>
+                </div>
+                <button class="alert-close" onclick="closeError()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results-container" id="resultsContainer" style="display: none;">
+                <!-- Match Score Card -->
+                <div class="result-card score-card">
+                    <h3 class="card-title">Match Score</h3>
+                    <div class="score-display">
+                        <div class="score-circle-container">
+                            <svg class="score-circle" viewBox="0 0 200 200">
+                                <circle class="score-bg" cx="100" cy="100" r="90"></circle>
+                                <circle class="score-progress" cx="100" cy="100" r="90" id="scoreProgressCircle"></circle>
+                            </svg>
+                            <div class="score-text">
+                                <div class="score-number" id="scoreNumber">0</div>
+                                <div class="score-label">out of 100</div>
+                            </div>
+                        </div>
+                        <div class="score-interpretation" id="scoreInterpretation"></div>
+                    </div>
+                </div>
+
+                <!-- Missing Skills Card -->
+                <div class="result-card">
+                    <h3 class="card-title">
+                        <i class="fas fa-exclamation-triangle"></i> Missing Skills
+                    </h3>
+                    <div class="card-content">
+                        <p class="card-description">Skills mentioned in the job description that are not present in your resume</p>
+                        <div class="skills-container" id="missingSkillsContainer">
+                            <!-- Skills will be dynamically added here -->
+                        </div>
+                        <div class="empty-state" id="missingSkillsEmpty" style="display: none;">
+                            <i class="fas fa-check-circle"></i>
+                            <p>Great! No critical skills are missing from your resume.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Improvement Suggestions Card -->
+                <div class="result-card">
+                    <h3 class="card-title">
+                        <i class="fas fa-lightbulb"></i> Improvement Suggestions
+                    </h3>
+                    <div class="card-content">
+                        <p class="card-description">Actionable recommendations to enhance your resume</p>
+                        <div class="suggestions-list" id="suggestionsContainer">
+                            <!-- Suggestions will be dynamically added here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommended Skills Card -->
+                <div class="result-card">
+                    <h3 class="card-title">
+                        <i class="fas fa-graduation-cap"></i> Recommended Skills to Learn
+                    </h3>
+                    <div class="card-content">
+                        <p class="card-description">Additional skills that would strengthen your application</p>
+                        <div class="skills-container" id="recommendedSkillsContainer">
+                            <!-- Skills will be dynamically added here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Analysis Card -->
+                <div class="result-card">
+                    <h3 class="card-title">
+                        <i class="fas fa-file-alt"></i> Detailed Analysis
+                    </h3>
+                    <div class="card-content">
+                        <div class="detailed-analysis" id="detailedAnalysis">
+                            <!-- Full analysis will be shown here -->
+                        </div>
+                        <button class="btn btn-outline" onclick="copyAnalysis()">
+                            <i class="fas fa-copy"></i> Copy Full Analysis
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="results-actions">
+                    <button class="btn btn-primary" onclick="downloadReport()">
+                        <i class="fas fa-download"></i> Download Report
+                    </button>
+                    <button class="btn btn-secondary" onclick="analyzeAnother()">
+                        <i class="fas fa-plus"></i> Analyze Another Resume
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Resume Analyzer</h4>
+                    <p>AI-powered resume analysis using advanced RAG technology</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Features</h4>
+                    <ul>
+                        <li>Match Score Analysis</li>
+                        <li>Skills Gap Identification</li>
+                        <li>Smart Recommendations</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Technology</h4>
+                    <ul>
+                        <li>FastAPI Backend</li>
+                        <li>LangChain RAG</li>
+                        <li>Groq LLM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Resume Analyzer. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

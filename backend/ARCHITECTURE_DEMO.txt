@@ -1,0 +1,9 @@
+Resume → Loader → Chuking → Embeddings 
+                                ↓
+JD → Loader → Chuking → Embeddings → Vector_DB
+                                        ↓
+                                    Retriver 
+                                        ↓
+                    Matching + Skill Gap Analysis
+                                        ↓
+                            LLm (Suggestions + Score)

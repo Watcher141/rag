@@ -1,0 +1,9 @@
+backend/__pycache__/
+backend/src/__pycache__/
+backend/src/.ipynb_checkpoints/
+venv/
+.venv/
+backend/.env
+backend/notebooks/.ipynb_checkpoints/
+.vscode/
+backend/data/
