@@ -8,11 +8,11 @@
 
 const ENV_CONFIG = {
   development: {
-    API_BASE_URL: "http://localhost:8000" || HTML_URLS,
+    API_BASE_URL: "https://rag-resume-analyser-1.onrender.com" || HTML_URLS,
     DEBUG: true,
   },
   production: {
-    API_BASE_URL: "https://your-production-domain.com/api",
+    API_BASE_URL: "https://rag-resume-analyser-1.onrender.com",
     DEBUG: false,
   },
 };

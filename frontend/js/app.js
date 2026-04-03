@@ -2,7 +2,7 @@
 // Configuration
 // ================================
 const CONFIG = {
-  API_BASE_URL: "http://localhost:8000" || HTML_URLS,
+  API_BASE_URL: "https://rag-resume-analyser-1.onrender.com" || HTML_URLS,
   MAX_FILE_SIZE: 10 * 1024 * 1024, // 10MB
   LOADING_MESSAGES: [
     "Initializing analysis...",
